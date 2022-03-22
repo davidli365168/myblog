@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="'viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/my.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: menu(1)" class="ui segment attached m-padded-tb-min bg-orange m-shadow-small">
+    <div class="ui container" style="width: 73%">
+        <div class="ui stackable menu secondary bg-orange">
+            <h2 class="ui header blue item">David Blog</h2>
+            <a href="#" class="item white"><i class="home icon"></i>index</a>
+            <a href="#" class="item white"><i class="idea icon"></i>category</a>
+            <a href="#" class="item white"><i class="tags icon"></i>tag</a>
+            <a href="#" class="item white"><i class="clone icon"></i>archive</a>
+            <a href="#" class="item white"><i class="info icon"></i>about me</a>
+            <div class="right item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--中间内容-->
+<div class="m-padded-tb-big">
+    <div class="ui container" style="width: 70%">
+        <div class="ui stackable grid">
+            <!--左边: 博客列表-->
+            <div class="eleven wide column">
+                <!--头部-->
+                <div class="ui top attached segment">
+                    <div class="ui two column grid middle aligned">
+                        <div class="column">
+                            <h3 class="ui blue header">blog</h3>
+                        </div>
+                        <div class="right aligned column">
+                            <h3 class="ui red header m-text-thin" style="display: inline-block" th:text="${page.totalElements}">14 </h3> articles
+                        </div>
+                    </div>
+                </div>
+                <!--列表-->
+                <div class="ui segment attached">
+                    <div class="ui vertical segment m-padded-big" th:each="blog : ${page.content}">
+                        <div class="ui middle aligned grid">
+                            <div class="eleven wide column">
+                                <h3 class="ui header"><a href="#" class="black" target="_blank" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">你知道什么是财富自由吗?</a></h3>
+                                <p class="m-text" th:text="|${blog.description}......|">
+                                    正确的做好每一件事,电子相册是的飒飒的方式打发斯蒂芬,阿斯顿发生大发士大夫送达方式.士大夫士大夫撒旦法,三大发达...
+                                </p>
+                                <div class="ui grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui horizontal link list">
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/237/100/100" class="ui avatar image" th:src="@{${blog.user.avatar}}">
+                                                <div class="content">
+                                                    <div class="header" th:text="${blog.user.nickname}">David</div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-1-11</span>
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i><span th:text="${blog.views}">569</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui label blue basic m-padded-tiny m-opacity-mini" th:text="${blog.category.name}">认知升级</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+                                    <img src="https://picsum.photos/id/237/220/130" class="ui rounded" th:src="@{${blog.firstPicture}}">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--底部-->
+                <div class="ui bottom segment attached">
+                    <div class="ui two column grid middle aligned" th:if="${page.totalPages}>1">
+                        <div class="column">
+                            <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}"  class="ui button basic teal">previous</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui button basic teal">next</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--右边: top-->
+            <div class="five wide column">
+                <!--右边: 分类-->
+                <div class="ui segments">
+                    <div class="ui segment secondary">
+                        <div class="ui two column grid">
+                            <div class="column"><i class="icon idea"></i>category</div>
+                            <div class="right aligned column"><a href="#" th:href="@{/categorys/-1}">more<i
+                                    class="icon angle double right"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="ui blue segment">
+                        <div class="ui fluid vertical menu">
+                            <a href="#" class="item" th:each="category: ${categorys}" th:href="@{/categorys/{id}(id=${category.id})}"><span th:text="${category.name}">学习日志</span>
+                                <div class="ui blue basic label" th:text="${#arrays.length(category.blogList)}">13</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--右边: 标签-->
+                <div class="ui segments m-margin-large">
+                    <div class="ui segment secondary">
+                        <div class="ui two column grid">
+                            <div class="column"><i class="icon tags"></i>tag</div>
+                            <div class="right aligned column"><a href="#" th:href="@{/tags/-1}">more<i
+                                    class="icon angle double right"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="ui blue segment">
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" class="ui blue basic label m-margin-tb-small" th:each="tag: ${tags}"><span th:text="${tag.name}">方法论</span>
+                            <div class="detail" th:text="${#arrays.length(tag.blogList)}">23</div>
+                        </a>
+                    </div>
+                </div>
+                <!--右边: 最新推荐-->
+                <div class="ui segments m-margin-large">
+                    <div class="ui segment secondary">
+                        <div class="column"><i class="icon bookmark"></i>recommended article</div>
+                    </div>
+                    <div class="ui segment" th:each="blog: ${recommendBlogs}">
+                        <a href="#" target="_blank" class="black" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">用户故事(User story)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<footer th:replace="_fragments :: footer" class="ui inverted segment vertical attached bg-orange m-padded-tb-massive" style="border: none">
+    <div class="ui center aligned container" style="width: 80%">
+        <div class="ui inverted divided grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/image/myPic.png" th:src="@{/image/myPic.png}" class="ui rounded image" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-thin m-text-spaced">latest blog</h3>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事 (User story)</a>
+                    <a href="#" class="item">用户故事 (User story)</a>
+                    <a href="#" class="item">用户故事 (User story)</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h3 class="ui inverted header m-text-thin m-text-spaced">contact me</h3>
+                <div class="ui inverted link list">
+                    <div class="item">Email: davidli365168@gmail.com</div>
+                    <div class="item">facebook: (User story)</div>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h3 class="ui inverted header m-text-thin m-text-spaced">info</h3>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">
+                    This is my personal blog, I will share about programming, writing, thinking related content, I hope
+                    it can help you...
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="../static/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/<th:block>/*/-->
+</body>
+</html>
