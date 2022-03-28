@@ -45,10 +45,10 @@
         <th:block th:each="item: ${archiveMap}">
             <h2 class="ui center aligned header" th:text="${item.key}">2021</h2>
             <div class="ui vertical fluid menu">
-                <a href="#" class="item" target="_blank" th:each="blog : ${item.value}">
+                <a href="#" class="item" target="_blank" th:each="blog : ${item.value}" th:href="@{/blog/{id}(id=${blog.id})}">
                     <span>
                         <i class="blue mini icon circle"></i> <span th:text="${blog.title}">关于可以哦练习的清单</span>
-                        <div class="ui blue basic left pointing label m-padded-small" th:text="${#dates.format(blog.updateTime,'MMMdd')}">Sep 03</div>
+                        <div class="ui blue basic left pointing label m-padded-small" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">Sep 03</div>
                     </span>
                     <div class="ui red basic label m-padded-small" th:text="${blog.flag}">original</div>
                 </a>

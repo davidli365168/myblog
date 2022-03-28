@@ -36,8 +36,7 @@
                 <div class="ui top attached segment">
                     <div class="ui header">About Me</div>
                     <div class="ui attached segment">
-                        <p class="m-text">DavidLi, a full stack developer</p>
-                        <p class="m-text">DavidLi, a full stack developer123</p>
+                        <p class="m-text">Ambitious java full stack developer with one and a half years of experience. Office technical expertise with website and applet front-end and back-end. Able to work well independently or as a part of a software programming team.</p>
                     </div>
                     <div class="ui attached segment">
                         <div class="ui purple left pointing basic label">programming</div>
@@ -45,15 +44,26 @@
                         <div class="ui yellow left pointing basic label">thinking</div>
                     </div>
                     <div class="ui attached segment">
-                        <div class="ui blue basic label m-margin-tb-small">Java</div>
-                        <div class="ui blue basic label m-margin-tb-small">Mysql</div>
-                        <div class="ui blue basic label m-margin-tb-small">Html+css</div>
-                        <div class="ui blue basic label m-margin-tb-small">Javascript</div>
-                        <div class="ui blue basic label m-margin-tb-small">Vue</div>
+                        <div class="ui blue basic label m-margin-tb-small">java</div>
+                        <div class="ui blue basic label m-margin-tb-small">javascript</div>
+                        <div class="ui blue basic label m-margin-tb-small">html</div>
+                        <div class="ui blue basic label m-margin-tb-small">css</div>
+                        <div class="ui blue basic label m-margin-tb-small">vue</div>
+                        <div class="ui blue basic label m-margin-tb-small">springboot</div>
+                        <div class="ui blue basic label m-margin-tb-small">mysql</div>
+                        <div class="ui blue basic label m-margin-tb-small">jpa</div>
+                        <div class="ui blue basic label m-margin-tb-small">jsp</div>
+                        <div class="ui blue basic label m-margin-tb-small">mybatis-plus</div>
+                        <div class="ui blue basic label m-margin-tb-small">semanticUI</div>
+                        <div class="ui blue basic label m-margin-tb-small">jquery</div>
+                        <div class="ui blue basic label m-margin-tb-small">layui</div>
+                        <div class="ui blue basic label m-margin-tb-small">uni-app</div>
+                        <div class="ui blue basic label m-margin-tb-small">redis</div>
+                        <div class="ui blue basic label m-margin-tb-small">thymeaf</div>
                     </div>
                     <div class="ui bottom attached segment">
-                        <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
-                        <a href="#" class="ui circular icon button"><i class="facebook icon"></i></a>
+                        <a href="#" class="ui phone circular icon button" data-content="022-6936809"
+                           data-position="bottom center"><i class="phone icon"></i></a>
                         <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
                         <a href="#" class="ui qq circular icon button" data-content="769673498"
                            data-position="bottom center"><i class="qq icon"></i></a>
@@ -61,14 +71,14 @@
                     <div class="ui wechatQr flowing popup transition hidden">
                         <div class="ui images">
                             <div class="image">
-                                <img src="../static/image/my-QRcode.jpg" th:src="@{/image/my-QRcode.png}" class="ui rounded bordered image" style="width: 130px">
+                                <img src="../static/image/my-QRcode.jpg" th:src="@{/image/my-QRcode.jpg}" class="ui rounded bordered image" style="width: 130px">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="eleven wide column">
-                <img src="https://picsum.photos/id/1/800/600" class="ui rounded image">
+                <img th:src="@{/image/photo.jpg}" class="ui rounded image">
             </div>
         </div>
     </div>
@@ -116,6 +126,7 @@
 </body>
 <script type="text/javascript">
     $('.qq').popup();
+    $('.phone').popup();
     $('.wechat').popup({
         popup: $('.wechatQr.popup'),
         on: 'hover',
